@@ -36,7 +36,6 @@ async def set_volume(volume: int = Query(le = 100, ge = 0)):
     obj.setvolume(volume)
     return {"volume": volume}
 
-
 @app.get("/api/getmute")
 async def get_mute(volume: int = Query(le=100, ge=0)):
     obj = PyCawAudio()

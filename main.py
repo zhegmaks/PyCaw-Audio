@@ -36,9 +36,21 @@ async def set_volume(volume: int = Query(le = 100, ge = 0)):
     obj.setvolume(volume)
     return {"volume": volume}
 
+
+@app.get("/api/getmute")
+async def get_mute(volume: int = Query(le=100, ge=0)):
+    obj = PyCawAudio()
+    obj.getmute(volume)
+    return {"volume": volume}
+
 class PyCawAudio:
     def __init__(self):
-        print("PyCawAudio initialized")
+        pass
+
+    def __new__(cls):
+        if not hasattr(cls, 'instance'):
+            cls.instance = super(PyCawAudio, cls).__new__(cls)
+        return cls.instance
 
     def setvolume(self, value):  # value from 0.0 to -64 (100 - 0 volume)
         scalarVolume = int(value) / 100
@@ -52,5 +64,5 @@ class PyCawAudio:
     def setmute(self, arg1, arg2):
         volume.SetMute(arg1, arg2) # 1 - mute, 0 - unmute
 
-obj = PyCawAudio()
-print(obj.getvolume())
+    def getmute(self):
+        volume.GetMute()

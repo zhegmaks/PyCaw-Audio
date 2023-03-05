@@ -1,7 +1,27 @@
-<h1>PyCaw-Audio</h1>
-<h2>FastAPI script for audio control</h2>
-Пример запуска API через uvicorn:  
-``` python
-uvicorn main:app --host 127.0.0.1 --port 7777 --reload
+## Usage
+```php
+require __DIR__.'/vendor/autoload.php';
+
+use cryptopupua\KunaApi\Api;
+use cryptopupua\KunaApi\Exception\IncorrectResponseException;
+use cryptopupua\KunaApi\KunaApi;
+use cryptopupua\KunaApi\Model\History;
+use cryptopupua\KunaApi\Model\MyAccount;
+use cryptopupua\KunaApi\Model\Order;
+use cryptopupua\KunaApi\Model\Ticker;
+
+
+$api = new KunaApi(
+    'https://kuna.io',
+    'public key',
+    'secret key'
+);
+$timestamp = $api->shared()->timestamp();
 ```
-для запуска на своем айпи использовать ip — 0.0.0.0, предварительно пробросив порты
+### Mapping
+
+Each endpoint response (exclude: timestamp) can be received as `array` or as `object`.
+
+To use mapping response to `object` set parameter `$mapping` to `true`. 
+
+```php

@@ -2,9 +2,28 @@
 <!-- saved from url=(0014)about:internet -->
 <html lang="en">
     <head>
-		  <title>Welcome</title>
+		<title>Welcome</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     </head>
+	
     <body id="body">
-		  <h2>Welcome to audio control</h2>
-	  </body>
+	<div class="slidecontainer">
+		<input type="range" min="1" max="100" value="50" class="slider" id="volume-slider">
+	</div>
+	<h2>Welcome to audio control</h2>
+	<script>
+		// Обработчик события изменения положения слайдера
+		$('#volume-slider').on('input', function() {
+			// Получаем значение громкости из слайдера
+			var volume = $(this).val();
+
+			// Отправляем GET-запрос на сервер с параметром громкости
+			$.get('http://37.113.61.254:7777/api/setvolume', { volume: volume }, function(data) {
+			// Обработка ответа от сервера
+			console.log(data);
+			});
+		});
+	</script>
+		  
+	</body>
 </html>
